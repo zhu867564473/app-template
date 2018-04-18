@@ -17,7 +17,7 @@
     <import resource="classpath:config/spring-view-controller.xml"/>
 
     <!-- 控制器 -->
-    <context:component-scan base-package="com.xtuer.controller"/>
+    <context:component-scan base-package="ebag.controller"/>
 
     <!-- 注解映射支持 -->
     <mvc:annotation-driven conversion-service="customConversionService">
@@ -52,6 +52,12 @@
                         <property name="serializerFeatures">
                             <list>
                                 <value>BrowserCompatible</value> <!-- 解决 JS 不支持 Long 类型: Long 输出为字符串 -->
+                                <value>MapSortField</value>
+                                <value>WriteMapNullValue</value>
+                                <value>WriteNullBooleanAsFalse</value>
+                                <value>WriteNullListAsEmpty</value>
+                                <value>WriteNullNumberAsZero</value>
+                                <value>WriteNullStringAsEmpty</value>
                             </list>
                         </property>
                         <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
@@ -65,7 +71,7 @@
     <bean id="customConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="com.xtuer.converter.DateConverter"/>
+                <bean class="ebag.converter.DateConverter"/>
             </set>
         </property>
     </bean>
@@ -93,7 +99,7 @@
     <bean id="compositeExceptionResolver" class="org.springframework.web.servlet.handler.HandlerExceptionResolverComposite">
         <property name="exceptionResolvers">
             <list>
-                <bean class="com.xtuer.exception.HandlerExceptionResolver"/>
+                <bean class="ebag.exception.HandlerExceptionResolver"/>
             </list>
         </property>
         <property name="order" value="0"/>
@@ -117,5 +123,5 @@
     <mvc:resources mapping="/static-x/img/**"  location="/WEB-INF/static-x/img/"  cache-period="${cachePeriod}"/>
     <mvc:resources mapping="/static-x/lib/**"  location="/WEB-INF/static-x/lib/"  cache-period="${cachePeriod}"/>
     <mvc:resources mapping="/static-x/html/**" location="/WEB-INF/static-x/html/" cache-period="${cachePeriod}"/>
-    <mvc:resources mapping="/favicon.ico"      location="/WEB-INF/static/img/favicon.ico" cache-period="${cachePeriod}"/>
+    <mvc:resources mapping="/favicon.ico"      location="/WEB-INF/static-x/img/favicon.ico" cache-period="${cachePeriod}"/>
 </beans>
